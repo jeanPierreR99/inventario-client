@@ -1,0 +1,47 @@
+export interface ISinabip {
+    id?: string;
+    codigoPatrimonial?: string;
+    denominacionBien?: string;
+    nroCtaContable?: string;
+    nomCtaContable?: string;
+    nroDocumentoAdquis?: string;
+    fechaDocumentoAdquis?: string;
+    valorAdquis?: string;
+    valorNeto?: string;
+    nomEstBien?: string;
+    opcAsegurado?: string;
+    condicion?: string;
+    nroResolucionBaja?: string;
+    fechaResolucionBaja?: string;
+    nroResolucionDisposic?: string;
+    fechaResolucionDisposic?: string;
+    nroResolucionAdminis?: string;
+    fechaResolucionAdminis?: string;
+    tipoMov?: string;
+    denominacionPredio?: string;
+    descArea?: string;
+    nroDocumento?: string;
+    ueNombresPers?: string;
+    ueApepatPers?: string;
+    ueApematPers?: string;
+    marca?: string;
+    modelo?: string;
+    tipo?: string;
+    color?: string;
+    serie?: string;
+    dimension?: string;
+    placa?: string;
+    nroMotor?: string;
+    nroChasis?: string;
+    matricula?: string;
+    anioFabricacion?: string;
+    raza?: string;
+    especie?: string;
+    edad?: string;
+    pais?: string;
+    otrasCaract?: string;
+    valorDeprecAcumAl2018?: string;
+    valorNetoAl2018?: string;
+    create_at?: string;
+
+}
