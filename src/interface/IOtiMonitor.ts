@@ -33,7 +33,7 @@ export interface IOtiMonitor {
     programs?: string;
     additional?: string;
     // Relaciones
-    computer?: IOtiComputer
+    computers?: IOtiComputer[]
     type_contract: string;
     siga?: ISiga
 }

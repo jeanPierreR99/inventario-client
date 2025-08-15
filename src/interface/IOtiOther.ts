@@ -67,7 +67,7 @@ export interface IOtiOther {
     create_at?: string;
 
     // Relación con una computadora (opcional)
-    computer?: IOtiComputer;
+    computers?: IOtiComputer[]
     type_contract: string;
 
     // Relación con SIGA (opcional)

@@ -93,31 +93,27 @@ const MonitorSearch = () => {
             position: { x: 400, y: 0 },
             style: { background: '#f59e0b', padding: 10, borderRadius: 8, width: 300 }
         },
-        ...(monitor.computer
-            ? [
-                {
-                    id: 'computer',
-                    data: {
-                        label: buildNodeLabel(
-                            '💻',
-                            `${monitor.computer.denomination || 'PC'} (${monitor.computer.model || ''})`,
-                            'pc',
-                            monitor.computer,
-                            `IP: ${monitor.computer.ip || 'N/A'}`,
-                            `Serie: ${monitor.computer.serial_number || 'N/A'}`,
-                            `Usuario: ${monitor.computer.user || 'N/A'}`
-                        )
-                    },
-                    position: { x: 400, y: 200 },
-                    style: { background: '#3b82f6', padding: 8, borderRadius: 6, width: 300 }
-                }
-            ]
-            : [])
+        ...monitor.computers?.map((c, i) => ({
+            id: `computer-${i}`,
+            data: {
+                label: buildNodeLabel(
+                    '💻',
+                    `${c.denomination || 'PC'} (${c.model || ''})`,
+                    'pc',
+                    c,
+                    `IP: ${c.ip || 'N/A'}`,
+                    `Serie: ${c.serial_number || 'N/A'}`,
+                    `Usuario: ${c.user || 'N/A'}`
+                )
+            },
+            position: { x: 100 + i * 400, y: 300 },
+            style: { background: '#3b82f6', padding: 8, borderRadius: 6, width: 300 }
+        })) || [],
     ];
 
-    const edges = monitor.computer
-        ? [{ id: 'e-mo-pc', source: 'monitor', target: 'computer' }]
-        : [];
+    const edges = [
+        ...(monitor.computers?.map((_, i) => ({ id: `e-pr-${i}`, source: 'monitor', target: `computer-${i}` })) || []),
+    ]
 
     return (
         <div className="w-full h-[80vh]">

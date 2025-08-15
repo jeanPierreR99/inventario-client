@@ -38,6 +38,6 @@ export interface IOtiSwitch {
     type_contract: string;
 
     // Relaciones
-    computer?: IOtiComputer;
+    computers?: IOtiComputer[]
     siga?: ISiga;
 }

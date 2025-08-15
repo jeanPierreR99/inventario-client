@@ -76,7 +76,7 @@ const PrinterScannerSearch = () => {
             ))}
         </button>
     );
-
+    // 3b82f6
     const nodes = [
         {
             id: 'printer',
@@ -93,31 +93,27 @@ const PrinterScannerSearch = () => {
             position: { x: 400, y: 0 },
             style: { background: '#10b981', padding: 10, borderRadius: 8, width: 300 }
         },
-        ...(printer.computer
-            ? [
-                {
-                    id: 'computer',
-                    data: {
-                        label: buildNodeLabel(
-                            '💻',
-                            `${printer.computer.denomination || 'PC'} (${printer.computer.model || ''})`,
-                            'pc',
-                            printer.computer,
-                            `IP: ${printer.computer.ip || 'N/A'}`,
-                            `Serie: ${printer.computer.serial_number || 'N/A'}`,
-                            `Usuario: ${printer.computer.user || 'N/A'}`
-                        )
-                    },
-                    position: { x: 400, y: 400 },
-                    style: { background: '#3b82f6', padding: 8, borderRadius: 6, width: 300 }
-                }
-            ]
-            : [])
+        ...printer.computers?.map((c, i) => ({
+            id: `computer-${i}`,
+            data: {
+                label: buildNodeLabel(
+                    '💻',
+                    `${c.denomination || 'PC'} (${c.model || ''})`,
+                    'pc',
+                    c,
+                    `IP: ${c.ip || 'N/A'}`,
+                    `Serie: ${c.serial_number || 'N/A'}`,
+                    `Usuario: ${c.user || 'N/A'}`
+                )
+            },
+            position: { x: 100 + i * 400, y: 300 },
+            style: { background: '#3b82f6', padding: 8, borderRadius: 6, width: 300 }
+        })) || [],
     ];
 
-    const edges = printer.computer
-        ? [{ id: 'e-pr-pc', source: 'printer', target: 'computer' }]
-        : [];
+    const edges = [
+        ...(printer.computers?.map((_, i) => ({ id: `e-pr-${i}`, source: 'printer', target: `computer-${i}` })) || []),
+    ]
 
     return (
         <div className="w-full h-[80vh]">

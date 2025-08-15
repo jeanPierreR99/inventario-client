@@ -93,31 +93,27 @@ const SwitchSearch = () => {
             position: { x: 400, y: 0 },
             style: { background: '#8b5cf6', padding: 10, borderRadius: 8, width: 300 }
         },
-        ...(sw.computer
-            ? [
-                {
-                    id: 'computer',
-                    data: {
-                        label: buildNodeLabel(
-                            '💻',
-                            `${sw.computer.denomination || 'PC'} (${sw.computer.model || ''})`,
-                            'pc',
-                            sw.computer,
-                            `IP: ${sw.computer.ip || 'N/A'}`,
-                            `Serie: ${sw.computer.serial_number || 'N/A'}`,
-                            `Usuario: ${sw.computer.user || 'N/A'}`
-                        )
-                    },
-                    position: { x: 400, y: 200 },
-                    style: { background: '#3b82f6', padding: 8, borderRadius: 6, width: 300 }
-                }
-            ]
-            : [])
+        ...sw.computers?.map((c, i) => ({
+            id: `computer-${i}`,
+            data: {
+                label: buildNodeLabel(
+                    '💻',
+                    `${c.denomination || 'PC'} (${c.model || ''})`,
+                    'pc',
+                    c,
+                    `IP: ${c.ip || 'N/A'}`,
+                    `Serie: ${c.serial_number || 'N/A'}`,
+                    `Usuario: ${c.user || 'N/A'}`
+                )
+            },
+            position: { x: 100 + i * 400, y: 300 },
+            style: { background: '#3b82f6', padding: 8, borderRadius: 6, width: 300 }
+        })) || [],
     ];
 
-    const edges = sw.computer
-        ? [{ id: 'e-sw-pc', source: 'switch', target: 'computer' }]
-        : [];
+    const edges = [
+        ...(sw.computers?.map((_, i) => ({ id: `e-pr-${i}`, source: 'switch', target: `computer-${i}` })) || []),
+    ]
 
     return (
         <div className="w-full h-[80vh]">

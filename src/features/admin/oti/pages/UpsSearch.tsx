@@ -94,38 +94,34 @@ const UpsSearch = () => {
             position: { x: 400, y: 0 },
             style: { background: '#f59e0b', padding: 10, borderRadius: 8, width: 300 }
         },
-        ...(ups.computer
-            ? [
-                {
-                    id: 'computer',
-                    data: {
-                        label: buildNodeLabel(
-                            '💻',
-                            `${ups.computer.denomination || 'PC'} (${ups.computer.model || ''})`,
-                            'pc',
-                            ups.computer,
-                            `IP: ${ups.computer.ip || 'N/A'}`,
-                            `Serie: ${ups.computer.serial_number || 'N/A'}`,
-                            `Usuario: ${ups.computer.user || 'N/A'}`
-                        )
-                    },
-                    position: { x: 400, y: 200 },
-                    style: { background: '#3b82f6', padding: 8, borderRadius: 6, width: 300 }
-                }
-            ]
-            : [])
+        ...ups.computers?.map((c, i) => ({
+            id: `computer-${i}`,
+            data: {
+                label: buildNodeLabel(
+                    '💻',
+                    `${c.denomination || 'PC'} (${c.model || ''})`,
+                    'pc',
+                    c,
+                    `IP: ${c.ip || 'N/A'}`,
+                    `Serie: ${c.serial_number || 'N/A'}`,
+                    `Usuario: ${c.user || 'N/A'}`
+                )
+            },
+            position: { x: 100 + i * 400, y: 300 },
+            style: { background: '#3b82f6', padding: 8, borderRadius: 6, width: 300 }
+        })) || [],
     ];
 
-    const edges = ups.computer
-        ? [{ id: 'e-ups-pc', source: 'ups', target: 'computer' }]
-        : [];
+    const edges = [
+        ...(ups.computers?.map((_, i) => ({ id: `e-pr-${i}`, source: 'ups', target: `computer-${i}` })) || []),
+    ]
 
     return (
         <div className="w-full h-[80vh]">
             <PageTitle title="Lista de UPS" />
             <div className="flex gap-2">
                 <Input
-                                        className='bg-white'
+                    className='bg-white'
 
                     placeholder="Buscar por código patrimonial..."
                     value={search}

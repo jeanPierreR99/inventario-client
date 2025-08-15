@@ -93,31 +93,27 @@ const RouterSearch = () => {
             position: { x: 400, y: 0 },
             style: { background: '#f59e0b', padding: 10, borderRadius: 8, width: 300 }
         },
-        ...(router.computer
-            ? [
-                {
-                    id: 'computer',
-                    data: {
-                        label: buildNodeLabel(
-                            '💻',
-                            `${router.computer.denomination || 'PC'} (${router.computer.model || ''})`,
-                            'pc',
-                            router.computer,
-                            `IP: ${router.computer.ip || 'N/A'}`,
-                            `Serie: ${router.computer.serial_number || 'N/A'}`,
-                            `Usuario: ${router.computer.user || 'N/A'}`
-                        )
-                    },
-                    position: { x: 400, y: 200 },
-                    style: { background: '#3b82f6', padding: 8, borderRadius: 6, width: 300 }
-                }
-            ]
-            : [])
+        ...router.computers?.map((c, i) => ({
+            id: `computer-${i}`,
+            data: {
+                label: buildNodeLabel(
+                    '💻',
+                    `${c.denomination || 'PC'} (${c.model || ''})`,
+                    'pc',
+                    c,
+                    `IP: ${c.ip || 'N/A'}`,
+                    `Serie: ${c.serial_number || 'N/A'}`,
+                    `Usuario: ${c.user || 'N/A'}`
+                )
+            },
+            position: { x: 100 + i * 400, y: 300 },
+            style: { background: '#3b82f6', padding: 8, borderRadius: 6, width: 300 }
+        })) || [],
     ];
 
-    const edges = router.computer
-        ? [{ id: 'e-rt-pc', source: 'router', target: 'computer' }]
-        : [];
+    const edges = [
+        ...(router.computers?.map((_, i) => ({ id: `e-pr-${i}`, source: 'router', target: `computer-${i}` })) || []),
+    ]
 
     return (
         <div className="w-full h-[80vh]">
