@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import type { IOtiPrinterScanner } from "@/interface/IOtiPrinterScanner"
 import { API } from "@/lib/api"
 import { Button } from "@/shared/components/ui/button"
-import { Eye, ArrowBigUpDash } from "lucide-react"
+import { Eye, ArrowBigUpDash, Search } from "lucide-react"
 import { PageTitle } from "@/shared/components/PageTitle"
 import { NavLink } from "react-router-dom"
 import { sedeData } from "@/data/sede_data"
@@ -16,6 +16,8 @@ const PrinterScannerList = () => {
     const [hasMore, setHasMore] = useState(true)
     const [loading, setLoading] = useState(false)
     const observerRef = useRef<HTMLDivElement | null>(null)
+
+    const [searchTerm, setSearchTerm] = useState("")
 
     const [selectedSede, setSelectedSede] = useState<string>("")
     const [selectedGeneralOffice, setSelectedGeneralOffice] = useState<string>("")
@@ -106,6 +108,12 @@ const PrinterScannerList = () => {
 
     const handleUnitChange = (value: string) => { setSelectedUnit(value) }
 
+    // ✅ Filtro por IP y MAC
+    const filteredPrinters = printers.filter(item =>
+        item.ip_address?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.mac_address?.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+
     return (
         <div>
             <PageTitle title="Lista de impresoras y escáneres" />
@@ -156,6 +164,19 @@ const PrinterScannerList = () => {
                 </Select>
             </div>
 
+
+            {/* 🔍 Input buscador */}
+            <div className="relative w-full md:w-sm mb-4">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                <input
+                    type="text"
+                    placeholder="Buscar por IP o MAC"
+                    value={searchTerm}
+                    onChange={e => setSearchTerm(e.target.value)}
+                    className="pl-10 pr-3 py-1.5 border rounded w-full bg-white"
+                />
+            </div>
+
             <Button
                 variant="outline"
                 className="mb-4"
@@ -164,6 +185,7 @@ const PrinterScannerList = () => {
                     setSelectedGeneralOffice("")
                     setSelectedOffice("")
                     setSelectedUnit("")
+                    setSearchTerm("")
                     setPage(1)
                     setHasMore(true)
                     setPrinters([])
@@ -181,12 +203,13 @@ const PrinterScannerList = () => {
                             <th className="px-4 py-2 text-left">Código</th>
                             <th className="px-4 py-2 text-left">Tipo</th>
                             <th className="px-4 py-2 text-left">IP</th>
+                            <th className="px-4 py-2 text-left">MAC</th>
                             <th className="px-4 py-2 text-left">Estado</th>
                             <th className="px-4 py-2 text-left">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {printers.map(item => (
+                        {filteredPrinters.map(item => (
                             <tr key={item.id} className="border-t hover:bg-gray-50">
                                 <td className="px-4 py-2">{item.create_at ? new Date(item.create_at).toLocaleDateString() : "-"}</td>
                                 <td className="px-4 py-2">
@@ -204,6 +227,7 @@ const PrinterScannerList = () => {
                                 </td>
                                 <td className="px-4 py-2">{item.type || "-"}</td>
                                 <td className="px-4 py-2 text-red-500">{item.ip_address || "-"}</td>
+                                <td className="px-4 py-2 text-green-600">{item.mac_address || "-"}</td>
                                 <td className="px-4 py-2">{item.status || "-"}</td>
                                 <td className="px-4 py-2">
                                     <Button size="sm" variant="outline" className="p-0">
@@ -215,9 +239,9 @@ const PrinterScannerList = () => {
                             </tr>
                         ))}
 
-                        {printers.length === 0 && !loading && (
+                        {filteredPrinters.length === 0 && !loading && (
                             <tr>
-                                <td colSpan={7} className="text-center py-4 text-gray-500">
+                                <td colSpan={8} className="text-center py-4 text-gray-500">
                                     No hay datos disponibles
                                 </td>
                             </tr>

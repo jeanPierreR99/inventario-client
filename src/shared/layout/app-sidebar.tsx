@@ -145,7 +145,7 @@ export function AppSidebar() {
                             ))}
                             <SidebarMenuItem>
                                 <SidebarMenuButton asChild>
-                                    <a href="https://asana.munitambopata.gob.pe/api/patrimonio/oti-computer/download-excel">Exprotar datos</a>
+                                    <a href="https://asana.munitambopata.gob.pe/api/patrimonio/oti-computer/download-excel">Exportar datos</a>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                         </SidebarMenu>

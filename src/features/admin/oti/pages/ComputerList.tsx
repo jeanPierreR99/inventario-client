@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import type { IOtiComputer } from "@/interface/IOtiComputer"
 import { API } from "@/lib/api"
 import { Button } from "@/shared/components/ui/button"
-import { ArrowBigUpDash, Eye } from "lucide-react"
+import { ArrowBigUpDash, Eye, Search } from "lucide-react"
 import { PageTitle } from "@/shared/components/PageTitle"
 import { NavLink } from "react-router-dom"
 import { sedeData } from "@/data/sede_data"
@@ -27,6 +27,9 @@ const ComputerList = () => {
     const [generalOffices, setGeneralOffices] = useState<any[]>([])
     const [offices, setOffices] = useState<any[]>([])
     const [units, setUnits] = useState<string[]>([])
+
+    // 🔍 Buscador por IP o MAC
+    const [searchTerm, setSearchTerm] = useState("")
 
     // Construir query
     const buildQuery = () => {
@@ -118,6 +121,13 @@ const ComputerList = () => {
         setSelectedUnit(value)
     }
 
+    // 🔎 Filtrar resultados por ip o mac
+    const filteredComputers = computers.filter(pc =>
+        [pc.ip, pc.mac].some(field =>
+            field?.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+    )
+
     return (
         <div>
             <PageTitle title="Lista de computadoras" />
@@ -175,6 +185,19 @@ const ComputerList = () => {
                     </SelectContent>
                 </Select>
             </div>
+
+            {/* 🔍 Input buscador */}
+            <div className="relative w-full md:w-sm mb-4">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                <input
+                    type="text"
+                    placeholder="Buscar por IP o MAC"
+                    value={searchTerm}
+                    onChange={e => setSearchTerm(e.target.value)}
+                    className="pl-10 pr-3 py-1.5 border rounded w-full bg-white"
+                />
+            </div>
+
             <Button
                 variant="outline"
                 className="mb-4"
@@ -186,11 +209,11 @@ const ComputerList = () => {
                     setPage(1)
                     setHasMore(true)
                     setComputers([])
+                    setSearchTerm("")
                 }}
             >
                 <ArrowBigUpDash /> Refrescar
             </Button>
-
 
             <div className="overflow-x-auto bg-white">
                 <table className="min-w-full text-xs">
@@ -199,23 +222,26 @@ const ComputerList = () => {
                             <th className="px-4 py-2 text-left">Fecha de registro</th>
                             <th className="px-4 py-2 text-left">Ubicación</th>
                             <th className="px-4 py-2 text-left">IP</th>
+                            <th className="px-4 py-2 text-left">MAC</th>
                             <th className="px-4 py-2 text-left">Código</th>
                             <th className="px-4 py-2 text-left">Estado</th>
                             <th className="px-4 py-2 text-left">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {computers.map(pc => (
+                        {filteredComputers.map(pc => (
                             <tr key={pc.id} className="border-t hover:bg-gray-50">
                                 <td className="px-4 py-2">{pc.create_at ? new Date(pc.create_at).toLocaleDateString() : "-"}</td>
-                                <td className="px-4 py-2"><div className="flex flex-col gap-1">
-                                    <div><strong>Sede:</strong> {pc.sede || "-"}</div>
-                                    <div><strong>Oficina general:</strong> {pc.generalOffice || "-"}</div>
-                                    <div><strong>Oficina:</strong> {pc.office || "-"}</div>
-                                    <div><strong>Unidad:</strong> {pc.unit || "-"}</div>
-                                </div>
+                                <td className="px-4 py-2">
+                                    <div className="flex flex-col gap-1">
+                                        <div><strong>Sede:</strong> {pc.sede || "-"}</div>
+                                        <div><strong>Oficina general:</strong> {pc.generalOffice || "-"}</div>
+                                        <div><strong>Oficina:</strong> {pc.office || "-"}</div>
+                                        <div><strong>Unidad:</strong> {pc.unit || "-"}</div>
+                                    </div>
                                 </td>
                                 <td className="px-4 py-2 text-red-500">{pc.ip || "-"}</td>
+                                <td className="px-4 py-2 text-green-600">{pc.mac || "-"}</td>
                                 <td className="px-4 py-2 w-60">
                                     <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded-sm border-blue-200 border">
                                         {pc.patrimonial_code || "-"}
@@ -232,7 +258,7 @@ const ComputerList = () => {
                             </tr>
                         ))}
 
-                        {computers.length === 0 && !loading && (
+                        {filteredComputers.length === 0 && !loading && (
                             <tr>
                                 <td colSpan={9} className="text-center py-4 text-gray-500">
                                     No hay datos disponibles

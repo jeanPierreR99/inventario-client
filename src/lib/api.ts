@@ -10,7 +10,7 @@ import type { ISinabip } from "../interface/ISinabip";
 import type { IOtiMonitor } from "../interface/IOtiMonitor";
 import type { OtiUps } from "../interface/IOtiUps";
 
-export const API_BASE = "https://asana.munitambopata.gob.pe/api/patrimonio"
+export const API_BASE = "https://inventario.munitambopata.gob.pe/api/patrimonio"
 // export const API_BASE = "http://localhost:3000/api/patrimonio"
 
 const api = axios.create({

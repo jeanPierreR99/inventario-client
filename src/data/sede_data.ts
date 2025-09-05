@@ -119,6 +119,10 @@ export const sedeData = [
                     },
                 ]
             },
+            {
+                "name": "ORGANO DE CONTROL INSTITUCIONAL",
+                "offices": []
+            },
         ]
     },
     {
