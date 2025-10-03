@@ -31,6 +31,8 @@ const UpsSearch = React.lazy(() => import("@/features/admin/oti/pages/UpsSearch"
 const OtherList = React.lazy(() => import("@/features/admin/oti/pages/OtherList"));
 const OtherSearch = React.lazy(() => import("@/features/admin/oti/pages/OtherSearch"));
 
+const Filter = React.lazy(() => import("@/features/admin/filter/pages/Filter"));
+
 
 const withSuspense = (Component: React.ReactNode) => (
     <Suspense fallback={<LoadingFallback />}>{Component}</Suspense>
@@ -104,6 +106,10 @@ export const RouteAdmin: RouteObject[] = [
                     {
                         path: "search-ups/:code?",
                         element: withSuspense(<UpsSearch />),
+                    },
+                    {
+                        path: "filter",
+                        element: withSuspense(<Filter />),
                     },
                 ]
             },

@@ -123,7 +123,7 @@ const ComputerList = () => {
 
     // 🔎 Filtrar resultados por ip o mac
     const filteredComputers = computers.filter(pc =>
-        [pc.ip, pc.mac, pc.model, pc.user, pc.patrimonial_code].some(field =>
+        [pc.ip, pc.mac, pc.model, pc.user, pc.patrimonial_code, pc.responsible].some(field =>
             field?.toLowerCase().includes(searchTerm.toLowerCase())
         )
     )
@@ -187,11 +187,11 @@ const ComputerList = () => {
             </div>
 
             {/* 🔍 Input buscador */}
-            <div className="relative w-full md:w-sm mb-4">
+            <div className="relative w-full mb-4">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                 <input
                     type="text"
-                    placeholder="Buscar por IP, MAC, Modelo, Código o Usuario"
+                    placeholder="Buscar por IP, MAC, Modelo, Código, Usuario o Responsable"
                     value={searchTerm}
                     onChange={e => setSearchTerm(e.target.value)}
                     className="pl-10 pr-3 py-1.5 border rounded w-full bg-white"
@@ -225,7 +225,8 @@ const ComputerList = () => {
                             <th className="px-4 py-2 text-left">IP</th>
                             <th className="px-4 py-2 text-left">MAC</th>
                             <th className="px-4 py-2 text-left">Modelo</th>
-                            <th className="px-4 py-2 text-left">Usuario</th>
+                            <th className="px-4 py-2 text-left">Usuario (computadora)</th>
+                            <th className="px-4 py-2 text-left">Responsable</th>
                             <th className="px-4 py-2 text-left">Código</th>
                             <th className="px-4 py-2 text-left">Estado</th>
                             <th className="px-4 py-2 text-left">Acciones</th>
@@ -261,6 +262,11 @@ const ComputerList = () => {
                                 <td className="px-4 py-2 w-60">
                                     <span className="bg-cyan-100 text-cyan-500 px-2 py-1 rounded-sm border-cyan-200 border">
                                         {pc.user || "-"}
+                                    </span>
+                                </td>
+                                <td className="px-4 py-2 w-60">
+                                    <span className="bg-yellow-100 text-yellow-500 px-2 py-1 rounded-sm border-yellow-200 border">
+                                        {pc.responsible || "-"}
                                     </span>
                                 </td>                                <td className="px-4 py-2 w-60">
                                     <span className="bg-blue-100 text-blue-500 px-2 py-1 rounded-sm border-blue-200 border">
