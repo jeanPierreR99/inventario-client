@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronRight, List, SearchCode, Printer, Computer, Monitor, ImageUpscale, SwitchCamera, Route, TableConfig, DoorClosed, Download, } from "lucide-react";
+import { ChevronRight, List, SearchCode, Printer, Computer, Monitor, ImageUpscale, SwitchCamera, Route, TableConfig, DoorClosed, Download, FilterX, } from "lucide-react";
 import {
     Sidebar,
     SidebarContent,
@@ -146,8 +146,8 @@ export function AppSidebar() {
                             <SidebarMenuItem>
                                 <SidebarMenuButton asChild>
                                     <a href="https://asana.munitambopata.gob.pe/api/patrimonio/oti-computer/download-excel">
-                                          <Download className="mr-2 h-4 w-4" />
-                                    Exportar datos</a>
+                                        <Download className="mr-2 h-4 w-4" />
+                                        Exportar datos</a>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                         </SidebarMenu>
@@ -159,24 +159,22 @@ export function AppSidebar() {
                     <SidebarGroupLabel>Filtro general</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
-                            {/* {allData.map((item) => (
-                                <SidebarMenuItem key={item.title}>
-                                    <SidebarMenuButton asChild>
-                                        <NavLink
-                                            to={item.url}
-                                            className={({ isActive }) =>
-                                                `flex items-center py-1 text-sm rounded-md ${isActive
-                                                    ? "bg-blue-100 text-blue-700"
-                                                    : "hover:bg-gray-100"
-                                                }`
-                                            }
-                                        >
-                                            <item.icon className="mr-2 h-4 w-4" />
-                                            <span>{item.title}</span>
-                                        </NavLink>
-                                    </SidebarMenuButton>
-                                </SidebarMenuItem>
-                            ))} */}
+                            <SidebarMenuItem>
+                                <SidebarMenuButton asChild>
+                                    <NavLink
+                                        to={"/oti/filter"}
+                                        className={({ isActive }) =>
+                                            `flex items-center py-1 text-sm rounded-md ${isActive
+                                                ? "bg-blue-100 text-blue-700"
+                                                : "hover:bg-gray-100"
+                                            }`
+                                        }
+                                    >
+                                        <FilterX className="mr-2 h-4 w-4" />
+                                        <span>Filtro (totales)</span>
+                                    </NavLink>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>

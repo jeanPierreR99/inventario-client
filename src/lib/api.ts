@@ -303,4 +303,11 @@ export const API = {
         const response: any = await api.delete(`/users/${id}`)
         return response.data.data
     },
+
+    //TOTAL DASHBOARD
+
+    getTotalDashboard: async (query: string) => {
+        const response: any = await api.get(`/oti-computer/total/hierarchy?query=${query}`)
+        return response.data.data
+    }
 }

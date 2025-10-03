@@ -1,7 +1,9 @@
+import InventoryDashboard from "../components/InventoryDashboard";
+
 const Filter = () => {
     return (
         <div>
-            FILTRO
+            <InventoryDashboard />
         </div>
     );
 };
