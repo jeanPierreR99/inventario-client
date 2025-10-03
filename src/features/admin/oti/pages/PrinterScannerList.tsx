@@ -102,7 +102,7 @@ const PrinterScannerList = () => {
         setSelectedUnit("")
         const sede = sedeData.find(s => s.name === selectedSede)
         const general = sede?.generalOffices?.find(g => g.name === selectedGeneralOffice)
-        const office = general?.offices.find(o => o.name === value)
+        const office = general?.offices?.find(o => o.name === value)
         setUnits(office?.units || [])
     }
 
@@ -226,9 +226,16 @@ const PrinterScannerList = () => {
                                     </span>
                                 </td>
                                 <td className="px-4 py-2">{item.type || "-"}</td>
-                                <td className="px-4 py-2 text-red-500">{item.ip_address || "-"}</td>
-                                <td className="px-4 py-2 text-green-600">{item.mac_address || "-"}</td>
-                                <td className="px-4 py-2">{item.status || "-"}</td>
+                                <td className="px-4 py-2 w-60">
+                                    <span className="bg-red-100 text-red-500 px-2 py-1 rounded-sm border-red-200 border">
+                                        {item.ip_address || "-"}
+                                    </span>
+                                </td>
+                                <td className="px-4 py-2 w-60">
+                                    <span className="bg-gray-100 text-gray-500 px-2 py-1 rounded-sm border-gray-200 border">
+                                        {item.mac_address || "-"}
+                                    </span>
+                                </td>                                  <td className="px-4 py-2">{item.status || "-"}</td>
                                 <td className="px-4 py-2">
                                     <Button size="sm" variant="outline" className="p-0">
                                         <NavLink className="p-2" to={`/oti/search-printer-scanner/${item.patrimonial_code}`}>

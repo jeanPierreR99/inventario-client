@@ -9,14 +9,36 @@ export const sedeData = [
         "generalOffices": [
             {
                 "name": "CONCEJO MUNICIPAL",
-                "offices": []
+                "offices": [
+                ]
+            },
+            {
+                "name": "SUBGERENCIA DE MEDIO AMBIENTE",
+                "offices": [
+                ]
+            },
+            {
+                "name": "OFICINA DE PROCURADURIA",
+                "offices": [
+                ]
+            },
+            {
+                "name": "OFICINA DE ALMACÉN CENTRAL",
+                "offices": [
+                ]
             },
             {
                 "name": "ALCALDÍA",
                 "offices": [
                     {
+                        "name": "ALCALDÍA - OFICINA PRINCIPAL",
+                    },
+                    {
                         "name": "SECRETARÍA GENERAL",
-                        "units": ["OFICINA DE TRÁMITE DOCUMENTARIO", "DEPARTAMENTO DE ARCHIVO CENTRAL (SEM LORETO)"]
+                        "units": [
+                            "OFICINA DE TRÁMITE DOCUMENTARIO",
+                            "DEPARTAMENTO DE ARCHIVO CENTRAL (SEM LORETO)"
+                        ]
                     },
                 ]
             },
@@ -24,17 +46,24 @@ export const sedeData = [
                 "name": "GERENCIA MUNICIPAL",
                 "offices": [
                     {
+                        "name": "GERENCIA MUNICIPAL - OFICINA PRINCIPAL",
+                    },
+                    {
                         "name": "OFICINA DE IMAGEN INSTITUCIONAL"
                     }
                 ]
             },
             {
                 "name": "OFICINA GENERAL DE ASESORÍA JURÍDICA",
-                "offices": []
+                "offices": [
+                ]
             },
             {
                 "name": "OFICINA GENERAL DE PLANEAMIENTO Y PRESUPUESTO",
                 "offices": [
+                    {
+                        "name": "OFICINA GENERAL DE PLANEAMIENTO Y PRESUPUESTO - OFICINA PRINCIPAL",
+                    },
                     {
                         "name": "OFICINA DE PLANEAMIENTO Y Y MODERNIZACIÓN"
                     },
@@ -55,6 +84,9 @@ export const sedeData = [
             {
                 "name": "OFICINA GENERAL DE ADMINSITRACIÓN Y FINANZAS",
                 "offices": [
+                    {
+                        "name": "OFICINA GENERAL DE ADMINISTRACIÓN Y FINANZAS - OFICINA PRINCIPAL",
+                    },
                     {
                         "name": "OFICINA DE PERSONAL",
                         "units": [
@@ -82,6 +114,9 @@ export const sedeData = [
                 "name": "GERENCIA DE DESARROLLO URBANO Y RURAL",
                 "offices": [
                     {
+                        "name": "GERENCIA DE DESARROLLO URBANO Y RURAL - OFICINA PRINCIPAL",
+                    },
+                    {
                         "name": "SUBGERENCIA DE PLANEAMIENTO Y ACONDICIONAMIENTO TERRITORIAL",
                     },
                     {
@@ -106,6 +141,9 @@ export const sedeData = [
                 "name": "GERENCIA DE RENTAS Y ADMINISTRACIÓN TRIBUTARIA",
                 "offices": [
                     {
+                        "name": "GERENCIA DE RENTAS Y ADMINISTRACIÓN TRIBUTARIA - OFICINA PRINCIPAL",
+                    },
+                    {
                         "name": "SUBGERENCIA DE REGISTRO Y CONTROL TRIBUTARIO",
                     },
                     {
@@ -120,7 +158,17 @@ export const sedeData = [
                 ]
             },
             {
+                "name": "SUBGERENCIA DE COMUNIDADES NATIVAS Y PARTICIPACIÓN CIUDADANA",
+                "offices": [
+                ]
+            },
+            {
                 "name": "ORGANO DE CONTROL INSTITUCIONAL",
+                "offices": [
+                ]
+            },
+            {
+                "name": "SALA DE REGIDORES",
                 "offices": []
             },
         ]
@@ -131,6 +179,9 @@ export const sedeData = [
             {
                 "name": "GERENCIA DE DESARROLLO ECONÓMICO LOCAL",
                 "offices": [
+                    {
+                        "name": "GERENCIA DE DESARROLLO ECONÓMICO LOCAL - OFICINA PRINCIPAL",
+                    },
                     {
                         "name": "SUBGERENCIA DE PROMOCIÓN EMPRESARIAL Y COMERCIALIZACIÓN"
                     },
@@ -154,6 +205,9 @@ export const sedeData = [
                 "name": "GERENCIA DE DESARROLLO SOCIAL",
                 "offices": [
                     {
+                        "name": "GERENCIA DE DESARROLLO SOCIAL - OFICINA PRINCIPAL",
+                    },
+                    {
                         "name": "SUBGERENCIA DE PROGRAMAS SOCIALES (VASO DE LECHE)",
                         "units": [
                             "DEFENSORÍA MUNICIPAL DEL NIÑO Y DEL ADOLESCENTE - DEMUNA (EX MAMAVISHI)",
@@ -169,14 +223,11 @@ export const sedeData = [
                         "name": "OFICINA DE REGISTRO CIVIL"
                     },
                     {
-                        "name": "SUBGERENCIA DE COMUNIDADES NATIVAS Y PARTICIPACIÓN CIUDADANA (PALACIO MUNICIPAL)"
-                    },
-                    {
-                        "name": "OFICINA DE REGISTRO CIVIL"
-                    },
-                    {
                         "name": "SUBGERENCIA DE SALUD Y SALUBRIDAD"
-                    }
+                    },
+                    {
+                        "name": "COMPROMISO"
+                    },
                 ]
             },
 
@@ -189,6 +240,9 @@ export const sedeData = [
                 "name": "GERENCIA DE GESTIÓN AMBIENTAL",
                 "offices": [
                     {
+                        "name": "GERENCIA DE GESTIÓN AMBIENTAL - OFICINA PRINCIPAL",
+                    },
+                    {
                         "name": "SUBGERENCIA DE MEDIO AMBIENTE (PALACIO MUNICIPAL)",
                         "units": [
                             "ÁREA TECNICA MUNICIPAL - ATM",
@@ -200,6 +254,12 @@ export const sedeData = [
                     },
                     {
                         "name": "UNDIAD DE GESTIÓN DE RESIDUOS SÓLIDOS",
+                    },
+                    {
+                        "name": "ARCHIVO CENTRAL"
+                    },
+                    {
+                        "name": "ALMACÉN - UGRS"
                     },
                 ]
             },
@@ -216,6 +276,9 @@ export const sedeData = [
                 "name": "GERENCIA DE SEGURIDAD CIUDADANA Y GESTIÓN DE RIESGO",
                 "offices": [
                     {
+                        "name": "GERENCIA DE SEGURIDAD CIUDADANA Y GESTIÓN DE RIESGO - OFICINA PRINCIPAL",
+                    },
+                    {
                         "name": "SUBGERENCIA DE SEGURIDAD VIAL Y TRÁNSITO",
                     },
                     {
@@ -223,10 +286,54 @@ export const sedeData = [
                     },
                     {
                         "name": "SUBGERENCIA DE GESTIÓN DE RIESGO Y DE DESASTRES (EX MAMAVISHI)"
+                    },
+                    {
+                        "name": "SUBGERENCIA DE OBRAS"
+                    },
+                    {
+                        "name": "SUBGERENCIA DE SUPERVISIÓN"
+                    },
+                    {
+                        "name": "SUBGERENCIA DE ESTUDIOS"
                     }
                 ]
             },
 
         ]
-    }
+    },
+    {
+        "name": "MAMAVISHI",
+    },
+    {
+        "name": "EX MAMAVISHI",
+        "generalOffices": [
+            {
+                "name": "SUBGERENCIA DE GESTIÓN DE RIESGO Y DE DESASTRES",
+                "offices": [
+                ]
+            },
+            {
+                "name": "DEMUNA",
+            }
+
+        ]
+    },
+    {
+        "name": "CASA HOGAR",
+    },
+    {
+        "name": "VASO DE LECHE",
+    },
+    {
+        "name": "OFICINA MUNICAPL DE ATENCIÓN A LAS PERSONAS CON DISCAPACIDAD - OMAPED",
+    },
+    {
+        "name": "CENTRO INTEGRAL DEL ADULTO MAYOR - CIAM",
+    },
+    {
+        "name": "UNIDAD LOCAL DE EMPADRONAMIENTO - ULE",
+    },
+    {
+        "name": "SEM CHAPAJAL",
+    },
 ]

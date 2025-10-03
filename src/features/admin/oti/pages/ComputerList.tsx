@@ -113,7 +113,7 @@ const ComputerList = () => {
         setSelectedUnit("")
         const sede = sedeData.find(s => s.name === selectedSede)
         const general = sede?.generalOffices?.find(g => g.name === selectedGeneralOffice)
-        const office = general?.offices.find(o => o.name === value)
+        const office = general?.offices?.find(o => o.name === value)
         setUnits(office?.units || [])
     }
 
@@ -123,7 +123,7 @@ const ComputerList = () => {
 
     // 🔎 Filtrar resultados por ip o mac
     const filteredComputers = computers.filter(pc =>
-        [pc.ip, pc.mac].some(field =>
+        [pc.ip, pc.mac, pc.model, pc.user, pc.patrimonial_code].some(field =>
             field?.toLowerCase().includes(searchTerm.toLowerCase())
         )
     )
@@ -191,7 +191,7 @@ const ComputerList = () => {
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                 <input
                     type="text"
-                    placeholder="Buscar por IP o MAC"
+                    placeholder="Buscar por IP, MAC, Modelo, Código o Usuario"
                     value={searchTerm}
                     onChange={e => setSearchTerm(e.target.value)}
                     className="pl-10 pr-3 py-1.5 border rounded w-full bg-white"
@@ -219,18 +219,22 @@ const ComputerList = () => {
                 <table className="min-w-full text-xs">
                     <thead className="bg-gray-100 text-sm">
                         <tr>
+                            <th className="px-4 py-2 text-center font-bold">#</th>
                             <th className="px-4 py-2 text-left">Fecha de registro</th>
                             <th className="px-4 py-2 text-left">Ubicación</th>
                             <th className="px-4 py-2 text-left">IP</th>
                             <th className="px-4 py-2 text-left">MAC</th>
+                            <th className="px-4 py-2 text-left">Modelo</th>
+                            <th className="px-4 py-2 text-left">Usuario</th>
                             <th className="px-4 py-2 text-left">Código</th>
                             <th className="px-4 py-2 text-left">Estado</th>
                             <th className="px-4 py-2 text-left">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredComputers.map(pc => (
+                        {filteredComputers.map((pc, index) => (
                             <tr key={pc.id} className="border-t hover:bg-gray-50">
+                                <td className="px-4 py-2 font-bold text-center">{index + 1}</td>
                                 <td className="px-4 py-2">{pc.create_at ? new Date(pc.create_at).toLocaleDateString() : "-"}</td>
                                 <td className="px-4 py-2">
                                     <div className="flex flex-col gap-1">
@@ -240,17 +244,33 @@ const ComputerList = () => {
                                         <div><strong>Unidad:</strong> {pc.unit || "-"}</div>
                                     </div>
                                 </td>
-                                <td className="px-4 py-2 text-red-500">{pc.ip || "-"}</td>
-                                <td className="px-4 py-2 text-green-600">{pc.mac || "-"}</td>
                                 <td className="px-4 py-2 w-60">
-                                    <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded-sm border-blue-200 border">
+                                    <span className="bg-red-100 text-red-500 px-2 py-1 rounded-sm border-red-200 border">
+                                        {pc.ip || "-"}
+                                    </span>
+                                </td>
+                                <td className="px-4 py-2 w-60">
+                                    <span className="bg-gray-100 text-gray-500 px-2 py-1 rounded-sm border-gray-200 border">
+                                        {pc.mac || "-"}
+                                    </span>
+                                </td>                                <td className="px-4 py-2 w-60">
+                                    <span className="bg-green-100 text-green-500 px-2 py-1 rounded-sm border-green-200 border">
+                                        {pc.model || "-"}
+                                    </span>
+                                </td>
+                                <td className="px-4 py-2 w-60">
+                                    <span className="bg-cyan-100 text-cyan-500 px-2 py-1 rounded-sm border-cyan-200 border">
+                                        {pc.user || "-"}
+                                    </span>
+                                </td>                                <td className="px-4 py-2 w-60">
+                                    <span className="bg-blue-100 text-blue-500 px-2 py-1 rounded-sm border-blue-200 border">
                                         {pc.patrimonial_code || "-"}
                                     </span>
                                 </td>
                                 <td className="px-4 py-2">{pc.status || "-"}</td>
                                 <td className="px-4 py-2">
                                     <Button size="sm" variant="outline" className="p-0">
-                                        <NavLink className="p-2" to={`/oti/search-computer/${pc.patrimonial_code}`}>
+                                        <NavLink target="_blank" className="p-2" to={`/oti/search-computer/${pc.patrimonial_code}`}>
                                             <Eye />
                                         </NavLink>
                                     </Button>

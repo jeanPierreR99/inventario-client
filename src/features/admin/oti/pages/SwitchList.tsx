@@ -100,7 +100,7 @@ const SwitchList = () => {
         setSelectedUnit("")
         const sede = sedeData.find(s => s.name === selectedSede)
         const general = sede?.generalOffices?.find(g => g.name === selectedGeneralOffice)
-        const office = general?.offices.find(o => o.name === value)
+        const office = general?.offices?.find(o => o.name === value)
         setUnits(office?.units || [])
     }
 

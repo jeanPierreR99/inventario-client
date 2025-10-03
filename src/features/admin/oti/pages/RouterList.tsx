@@ -102,7 +102,7 @@ const RouterList = () => {
         setSelectedUnit("")
         const sede = sedeData.find(s => s.name === selectedSede)
         const general = sede?.generalOffices?.find(g => g.name === selectedGeneralOffice)
-        const office = general?.offices.find(o => o.name === value)
+        const office = general?.offices?.find(o => o.name === value)
         setUnits(office?.units || [])
     }
 
@@ -222,8 +222,16 @@ const RouterList = () => {
                                         {item.patrimonial_code || "-"}
                                     </span>
                                 </td>
-                                <td className="px-4 py-2 text-red-500">{item.ip || "-"}</td>
-                                <td className="px-4 py-2 text-green-600">{item.mac || "-"}</td>
+                                <td className="px-4 py-2 w-60">
+                                    <span className="bg-red-100 text-red-500 px-2 py-1 rounded-sm border-red-200 border">
+                                        {item.ip || "-"}
+                                    </span>
+                                </td>
+                                <td className="px-4 py-2 w-60">
+                                    <span className="bg-gray-100 text-gray-500 px-2 py-1 rounded-sm border-gray-200 border">
+                                        {item.mac || "-"}
+                                    </span>
+                                </td>
                                 <td className="px-4 py-2">{item.frequency_band || "-"}</td>
                                 <td className="px-4 py-2">{item.status || "-"}</td>
                                 <td className="px-4 py-2">

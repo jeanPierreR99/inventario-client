@@ -104,7 +104,7 @@ const UPSList = () => {
         setSelectedUnit("")
         const sede = sedeData.find(s => s.name === selectedSede)
         const general = sede?.generalOffices?.find(g => g.name === selectedGeneralOffice)
-        const office = general?.offices.find(o => o.name === value)
+        const office = general?.offices?.find(o => o.name === value)
         setUnits(office?.units || [])
     }
 
@@ -181,10 +181,7 @@ const UPSList = () => {
                     <thead className="bg-gray-100 text-sm">
                         <tr>
                             <th className="px-4 py-2 text-left">Fecha de registro</th>
-                            <th className="px-4 py-2 text-left">Sede</th>
-                            <th className="px-4 py-2 text-left">Oficina general</th>
-                            <th className="px-4 py-2 text-left">Oficina</th>
-                            <th className="px-4 py-2 text-left">Unidad</th>
+                            <th className="px-4 py-2 text-left">Ubicación</th>
                             <th className="px-4 py-2 text-left">Código</th>
                             <th className="px-4 py-2 text-left">Capacidad</th>
                             <th className="px-4 py-2 text-left">Voltaje</th>
@@ -196,10 +193,14 @@ const UPSList = () => {
                         {upsList.map(item => (
                             <tr key={item.id} className="border-t hover:bg-gray-50">
                                 <td className="px-4 py-2">{item.create_at ? new Date(item.create_at).toLocaleDateString() : "-"}</td>
-                                <td className="px-4 py-2">{item.sede || "-"}</td>
-                                <td className="px-4 py-2">{item.generalOffice || "-"}</td>
-                                <td className="px-4 py-2">{item.office || "-"}</td>
-                                <td className="px-4 py-2">{item.unit || "-"}</td>
+                                <td className="px-4 py-2">
+                                    <div className="flex flex-col gap-1">
+                                        <div><strong>Sede:</strong> {item.sede || "-"}</div>
+                                        <div><strong>Oficina general:</strong> {item.generalOffice || "-"}</div>
+                                        <div><strong>Oficina:</strong> {item.office || "-"}</div>
+                                        <div><strong>Unidad:</strong> {item.unit || "-"}</div>
+                                    </div>
+                                </td>
                                 <td className="px-4 py-2 w-60">
                                     <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded-sm border-blue-200 border">
                                         {item.patrimonial_code || "-"}

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronRight, List, SearchCode, Printer, Computer, Monitor, ImageUpscale, SwitchCamera, Route, TableConfig, DoorClosed, } from "lucide-react";
+import { ChevronRight, List, SearchCode, Printer, Computer, Monitor, ImageUpscale, SwitchCamera, Route, TableConfig, DoorClosed, Download, } from "lucide-react";
 import {
     Sidebar,
     SidebarContent,
@@ -145,7 +145,9 @@ export function AppSidebar() {
                             ))}
                             <SidebarMenuItem>
                                 <SidebarMenuButton asChild>
-                                    <a href="https://asana.munitambopata.gob.pe/api/patrimonio/oti-computer/download-excel">Exportar datos</a>
+                                    <a href="https://asana.munitambopata.gob.pe/api/patrimonio/oti-computer/download-excel">
+                                          <Download className="mr-2 h-4 w-4" />
+                                    Exportar datos</a>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                         </SidebarMenu>
