@@ -227,7 +227,7 @@ const MonitorList = () => {
                                 <td className="px-4 py-2">{m.status || "-"}</td>
                                 <td className="px-4 py-2">
                                     <Button size="sm" variant="outline" className="p-0">
-                                        <NavLink className="p-2" to={`/oti/search-monitor/${m.patrimonial_code}`}>
+                                        <NavLink target="_blank" className="p-2" to={`/oti/search-monitor/${m.patrimonial_code}`}>
                                             <Eye />
                                         </NavLink>
                                     </Button>

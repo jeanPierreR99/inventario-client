@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronRight, List, SearchCode, Printer, Computer, Monitor, ImageUpscale, SwitchCamera, Route, TableConfig, DoorClosed, Download, FilterX, } from "lucide-react";
+import { ChevronRight, List, SearchCode, Printer, Computer, Monitor, ImageUpscale, SwitchCamera, Route, TableConfig, DoorClosed, Download, ArrowUpZA, ArrowUp10, } from "lucide-react";
 import {
     Sidebar,
     SidebarContent,
@@ -170,8 +170,24 @@ export function AppSidebar() {
                                             }`
                                         }
                                     >
-                                        <FilterX className="mr-2 h-4 w-4" />
+                                        <ArrowUp10 className="mr-2 h-4 w-4" />
                                         <span>Filtro (totales)</span>
+                                    </NavLink>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
+                            <SidebarMenuItem>
+                                <SidebarMenuButton asChild>
+                                    <NavLink
+                                        to={"/oti/filter-pro"}
+                                        className={({ isActive }) =>
+                                            `flex items-center py-1 text-sm rounded-md ${isActive
+                                                ? "bg-blue-100 text-blue-700"
+                                                : "hover:bg-gray-100"
+                                            }`
+                                        }
+                                    >
+                                        <ArrowUpZA className="mr-2 h-4 w-4" />
+                                        <span>Filtro (general)</span>
                                     </NavLink>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>

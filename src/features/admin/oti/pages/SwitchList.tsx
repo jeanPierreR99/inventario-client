@@ -207,7 +207,7 @@ const SwitchList = () => {
                                 <td className="px-4 py-2">{item.status || "-"}</td>
                                 <td className="px-4 py-2">
                                     <Button size="sm" variant="outline" className="p-0">
-                                        <NavLink className="p-2" to={`/oti/search-switch/${item.patrimonial_code}`}>
+                                        <NavLink target="_blank" className="p-2" to={`/oti/search-switch/${item.patrimonial_code}`}>
                                             <Eye />
                                         </NavLink>
                                     </Button>

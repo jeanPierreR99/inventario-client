@@ -32,7 +32,7 @@ const OtherList = React.lazy(() => import("@/features/admin/oti/pages/OtherList"
 const OtherSearch = React.lazy(() => import("@/features/admin/oti/pages/OtherSearch"));
 
 const Filter = React.lazy(() => import("@/features/admin/filter/pages/Filter"));
-
+const FilterPro = React.lazy(() => import("@/features/admin/filter/pages/FilterPro"));
 
 const withSuspense = (Component: React.ReactNode) => (
     <Suspense fallback={<LoadingFallback />}>{Component}</Suspense>
@@ -110,6 +110,10 @@ export const RouteAdmin: RouteObject[] = [
                     {
                         path: "filter",
                         element: withSuspense(<Filter />),
+                    },
+                    {
+                        path: "filter-pro",
+                        element: withSuspense(<FilterPro />),
                     },
                 ]
             },

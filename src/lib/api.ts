@@ -11,7 +11,7 @@ import type { IOtiMonitor } from "../interface/IOtiMonitor";
 import type { OtiUps } from "../interface/IOtiUps";
 
 export const API_BASE = "https://inventario.munitambopata.gob.pe/api/patrimonio"
-// export const API_BASE = "http://localhost:3000/api/patrimonio"
+// export const API_BASE = "http://172.16.1.55:5000/api/patrimonio"
 
 const api = axios.create({
     baseURL: API_BASE,
@@ -305,9 +305,14 @@ export const API = {
     },
 
     //TOTAL DASHBOARD
-
     getTotalDashboard: async (query: string) => {
         const response: any = await api.get(`/oti-computer/total/hierarchy?query=${query}`)
+        return response.data.data
+    },
+
+    //FILTER PRO
+    searchAll: async (query: string) => {
+        const response: any = await api.get(`/oti-computer/search/all?query=${query}`)
         return response.data.data
     }
 }
