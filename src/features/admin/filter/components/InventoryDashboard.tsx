@@ -35,7 +35,7 @@ export default function InventoryDashboard() {
     const [data, setData] = useState<any>(null)
 
     // Filtros
-    const [selectedSede, setSelectedSede] = useState<string>("PALACIO MUNICIPAL")
+    const [selectedSede, setSelectedSede] = useState<string>("")
     const [selectedGeneralOffice, setSelectedGeneralOffice] = useState<string>("")
     const [selectedOffice, setSelectedOffice] = useState<string>("")
     const [selectedUnit, setSelectedUnit] = useState<string>("")

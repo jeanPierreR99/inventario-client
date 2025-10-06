@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { PageTitle } from "@/shared/components/PageTitle"
 import { Button } from "@/shared/components/ui/button"
 import { Card, CardHeader, CardTitle, CardContent } from "@/shared/components/ui/card"
@@ -14,6 +14,8 @@ import type { IOtiComputer } from "@/interface/IOtiComputer"
 import type { IOtiMonitor } from "@/interface/IOtiMonitor"
 import type { OtiUps } from "@/interface/IOtiUps"
 import type { IOtiOther } from "@/interface/IOtiOther"
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/shared/components/ui/select"
+import { sedeData } from "@/data/sede_data"
 
 interface IsearchAll {
     routers: IOtiRouter[],
@@ -55,9 +57,124 @@ export function FilterPro() {
         }
     }
 
+
+    const buildQuery = () => {
+        if (selectedUnit) return selectedUnit
+        if (selectedOffice) return selectedOffice
+        if (selectedGeneralOffice) return selectedGeneralOffice
+        if (selectedSede) return selectedSede
+        return null
+    }
+    
+    const handleDataOffice = async () => {
+        const query = buildQuery()
+
+        try {
+            if (query) {
+                const response = await API.searchAll(query)
+                setData(response)
+            } else {
+                return
+            }
+        } catch (error) {
+            console.error("Error fetching data:", error)
+        }
+    }
+
+
+    const [selectedSede, setSelectedSede] = useState<string>("")
+    const [selectedGeneralOffice, setSelectedGeneralOffice] = useState<string>("")
+    const [selectedOffice, setSelectedOffice] = useState<string>("")
+    const [selectedUnit, setSelectedUnit] = useState<string>("")
+
+    const [generalOffices, setGeneralOffices] = useState<any[]>([])
+    const [offices, setOffices] = useState<any[]>([])
+    const [units, setUnits] = useState<string[]>([])
+
+    const handleSedeChange = (value: string) => {
+        setSelectedSede(value)
+        setSelectedGeneralOffice("")
+        setSelectedOffice("")
+        setSelectedUnit("")
+        setOffices([])
+        setUnits([])
+        const sede = sedeData.find(s => s.name === value)
+        setGeneralOffices(sede?.generalOffices || [])
+    }
+
+    const handleGeneralOfficeChange = (value: string) => {
+        setSelectedGeneralOffice(value)
+        setSelectedOffice("")
+        setSelectedUnit("")
+        setUnits([])
+        const sede = sedeData.find(s => s.name === selectedSede)
+        const general = sede?.generalOffices?.find(g => g.name === value)
+        setOffices(general?.offices || [])
+    }
+
+    const handleOfficeChange = (value: string) => {
+        setSelectedOffice(value)
+        setSelectedUnit("")
+        const sede = sedeData.find(s => s.name === selectedSede)
+        const general = sede?.generalOffices?.find(g => g.name === selectedGeneralOffice)
+        const office = general?.offices?.find(o => o.name === value)
+        setUnits(office?.units || [])
+    }
+
+    useEffect(() => {
+        handleDataOffice()
+    }, [selectedSede, selectedGeneralOffice, selectedOffice, selectedUnit])
+
+    const handleUnitChange = (value: string) => { setSelectedUnit(value) }
     return (
         <div className="space-y-10">
             <PageTitle title="Filtro general de inventarios" />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-4">
+                <Select value={selectedSede} onValueChange={handleSedeChange}>
+                    <SelectTrigger className="border bg-white p-1 rounded w-sm">
+                        <SelectValue placeholder="-- Seleccionar Sede --" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectGroup>
+                            {sedeData.map(s => <SelectItem key={s.name} value={s.name}>{s.name}</SelectItem>)}
+                        </SelectGroup>
+                    </SelectContent>
+                </Select>
+
+                <Select value={selectedGeneralOffice} onValueChange={handleGeneralOfficeChange} disabled={!generalOffices.length}>
+                    <SelectTrigger className="border bg-white p-1 rounded w-sm">
+                        <SelectValue placeholder="-- Seleccionar Oficina General --" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectGroup>
+                            {generalOffices.map(g => <SelectItem key={g.name} value={g.name}>{g.name}</SelectItem>)}
+                        </SelectGroup>
+                    </SelectContent>
+                </Select>
+
+                <Select value={selectedOffice} onValueChange={handleOfficeChange} disabled={!offices.length}>
+                    <SelectTrigger className="border bg-white p-1 rounded w-sm">
+                        <SelectValue placeholder="-- Seleccionar Oficina --" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectGroup>
+                            {offices.map(o => <SelectItem key={o.name} value={o.name}>{o.name}</SelectItem>)}
+                        </SelectGroup>
+                    </SelectContent>
+                </Select>
+
+                <Select value={selectedUnit} onValueChange={handleUnitChange} disabled={!units.length}>
+                    <SelectTrigger className="border bg-white p-1 rounded w-sm">
+                        <SelectValue placeholder="-- Seleccionar Unidad --" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectGroup>
+                            {units.map(u => <SelectItem key={u} value={u}>{u}</SelectItem>)}
+                        </SelectGroup>
+                    </SelectContent>
+                </Select>
+            </div>
 
             {/* Buscador */}
             <div className="flex gap-4 items-center mb-8">
@@ -86,7 +203,7 @@ export function FilterPro() {
                             <CardContent>
                                 <div className="overflow-x-auto max-h-[500px]">
                                     <table className="min-w-full border text-xs">
-                                        <thead className="bg-gray-100 text-gray-700">
+                                        <thead className="bg-gray-100 text-gray-700 text-sm">
                                             <tr>
                                                 <th className="px-4 py-2 text-left">Fecha</th>
                                                 <th className="px-4 py-2 text-left">Ubicación</th>
