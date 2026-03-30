@@ -9,9 +9,11 @@ import type { IUser } from "../interface/IUser";
 import type { ISinabip } from "../interface/ISinabip";
 import type { IOtiMonitor } from "../interface/IOtiMonitor";
 import type { OtiUps } from "../interface/IOtiUps";
+import type { IDevice } from "@/interface/IDevice";
+import type { IRouter } from "@/interface/IRouter";
 
- export const API_BASE = "https://inventario.munitambopata.gob.pe/api/patrimonio"
-// export const API_BASE = "http://localhost:3000/api/patrimonio";
+export const API_BASE = "https://inventario.munitambopata.gob.pe/api/patrimonio"
+// export const API_BASE = "http://192.168.0.218:3000/api/patrimonio";
 
 const api = axios.create({
   baseURL: API_BASE,
@@ -349,4 +351,64 @@ export const API = {
     );
     return response.data.data;
   },
+
+  //OTI-DEVICES
+  getAllDataDevices: async (page: number, limit: number) => {
+    const response: any = await api.get(
+      `/devices/paginate?page=${page}&limit=${limit}`
+    );
+    return response.data.data;
+  },
+  saveDevices: async (data: IDevice) => {
+    const response: any = await api.post(`/devices`, data);
+    return response.data.data;
+  },
+  getByPisoDevices: async (piso: string) => {
+    const response: any = await api.get(`/devices/${piso}`);
+    return response.data.data;
+  },
+  updateDevices: async (id: string, data: Partial<IDevice>) => {
+    const response: any = await api.put(`/devices/${id}`, data);
+    return response.data.data;
+  },
+  deleteDevices: async (id: string) => {
+    const response: any = await api.delete(`/devices/${id}`);
+    return response.data.data;
+  },
+
+  //aux
+  getAllOfficeByName: async (name: string) => {
+    const response: any = await api.get(
+      `https://asana.munitambopata.gob.pe/api/v1/offices?name=${name}`
+    );
+    return response.data.data;
+  },
+
+  //ROUTER
+  saveRouter: async (data: IRouter) => {
+    const response: any = await api.post(`/routers`, data);
+    return response.data.data;
+  },
+  getAllDataRouters: async () => {
+    const response: any = await api.get(
+      `/routers/`
+    );
+    return response.data.data;
+  },
+  getAllDataRoutersByPiso: async (piso: string) => {
+    const response: any = await api.get(
+      `/routers/${piso}`
+    );
+    return response.data.data;
+  },
+  updateRouter: async (id: string, data: Partial<IRouter>) => {
+    const response: any = await api.put(`/routers/${id}`, data);
+    return response.data.data;
+  },
+  deleteRouter: async (id: string) => {
+    const response: any = await api.delete(`/routers/${id}`);
+    return response.data.data;
+  },
 };
+
+

@@ -108,7 +108,7 @@ const Login = () => {
                                         </FormItem>
                                     )}
                                 />
-                                {message && <AlertMessage message={message} />}
+                                {message && <AlertMessage message={message} type="error" />}
                             </div>
 
                             <div className="flex flex-col md:flex-row items-left gap-2 justify-between">

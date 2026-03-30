@@ -72,7 +72,7 @@ const ComputerList = () => {
           );
           setSelectedData(response.available);
         }
-        else{
+        else {
           setSelectedData([]);
         }
       } else {
@@ -172,7 +172,7 @@ const ComputerList = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-4">
         <Select value={selectedSede} onValueChange={handleSedeChange}>
-          <SelectTrigger className="border bg-white p-1 rounded w-sm">
+          <SelectTrigger className="border bg-white p-1 rounded w-xs">
             <SelectValue placeholder="-- Seleccionar Sede --" />
           </SelectTrigger>
           <SelectContent>
@@ -191,7 +191,7 @@ const ComputerList = () => {
           onValueChange={handleGeneralOfficeChange}
           disabled={!generalOffices.length}
         >
-          <SelectTrigger className="border bg-white p-1 rounded w-sm">
+          <SelectTrigger className="border bg-white p-1 rounded w-xs">
             <SelectValue placeholder="-- Seleccionar Oficina General --" />
           </SelectTrigger>
           <SelectContent>
@@ -210,7 +210,7 @@ const ComputerList = () => {
           onValueChange={handleOfficeChange}
           disabled={!offices.length}
         >
-          <SelectTrigger className="border bg-white p-1 rounded w-sm">
+          <SelectTrigger className="border bg-white p-1 rounded w-xs">
             <SelectValue placeholder="-- Seleccionar Oficina --" />
           </SelectTrigger>
           <SelectContent>
@@ -229,7 +229,7 @@ const ComputerList = () => {
           onValueChange={handleUnitChange}
           disabled={!units.length}
         >
-          <SelectTrigger className="border bg-white p-1 rounded w-sm">
+          <SelectTrigger className="border bg-white p-1 rounded w-xs">
             <SelectValue placeholder="-- Seleccionar Unidad --" />
           </SelectTrigger>
           <SelectContent>
@@ -279,13 +279,13 @@ const ComputerList = () => {
           <thead className="bg-gray-100 text-sm">
             <tr>
               <th className="px-4 py-2 text-center font-bold">#</th>
-              <th className="px-4 py-2 text-left">Fecha de registro</th>
-              <th className="px-4 py-2 text-left">Ubicación</th>
+              <th className="px-4 py-2 text-left min-w-40">Fecha de registro</th>
+              <th className="px-4 py-2 text-left min-w-100">Ubicación</th>
               <th className="px-4 py-2 text-left">IP</th>
               <th className="px-4 py-2 text-left">MAC</th>
               <th className="px-4 py-2 text-left">Modelo</th>
-              <th className="px-4 py-2 text-left">Usuario (computadora)</th>
-              <th className="px-4 py-2 text-left">Responsable</th>
+              <th className="px-4 py-2 text-left min-w-50">Usuario (computadora)</th>
+              <th className="px-4 py-2 text-left min-w-70">Responsable</th>
               <th className="px-4 py-2 text-left">Código</th>
               <th className="px-4 py-2 text-left">Estado</th>
               <th className="px-4 py-2 text-left">Acciones</th>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronRight, List, SearchCode, Printer, Computer, Monitor, ImageUpscale, SwitchCamera, Route, TableConfig, DoorClosed, Download, ArrowUpZA, ArrowUp10, } from "lucide-react";
+import { ChevronRight, List, SearchCode, Printer, Computer, Monitor, Network, ImageUpscale, SwitchCamera, Route, TableConfig, DoorClosed, Download, ArrowUpZA, ArrowUp10, } from "lucide-react";
 import {
     Sidebar,
     SidebarContent,
@@ -81,9 +81,9 @@ const itemsOti = [
     },
 ];
 
-// const allData = [
-//     { title: "Filtros", url: "/siga/inventario", icon: FilterX },
-// ];
+const itemsConexiones = [
+    { title: "Conexiones", url: "/oti/connections", icon: Network },
+];
 
 // const itemsSiga = [
 //     { title: "Inventario Siga", url: "/siga/inventario", icon: Home },
@@ -145,7 +145,7 @@ export function AppSidebar() {
                             ))}
                             <SidebarMenuItem>
                                 <SidebarMenuButton asChild>
-                                    <a href="https://asana.munitambopata.gob.pe/api/patrimonio/oti-computer/download-excel">
+                                    <a href="https://inventario.munitambopata.gob.pe/api/patrimonio/oti-computer/download-excel">
                                         <Download className="mr-2 h-4 w-4" />
                                         Exportar datos</a>
                                 </SidebarMenuButton>
@@ -197,10 +197,10 @@ export function AppSidebar() {
 
                 {/* SIGA */}
                 <SidebarGroup>
-                    <SidebarGroupLabel>SIGA</SidebarGroupLabel>
+                    <SidebarGroupLabel>Conexiones de equipos</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
-                            {/* {itemsSiga.map((item) => (
+                            {itemsConexiones.map((item) => (
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton asChild>
                                         <NavLink
@@ -217,7 +217,7 @@ export function AppSidebar() {
                                         </NavLink>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
-                            ))} */}
+                            ))}
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>

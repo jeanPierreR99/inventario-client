@@ -34,6 +34,8 @@ const OtherSearch = React.lazy(() => import("@/features/admin/oti/pages/OtherSea
 const Filter = React.lazy(() => import("@/features/admin/filter/pages/Filter"));
 const FilterPro = React.lazy(() => import("@/features/admin/filter/pages/FilterPro"));
 
+const Connections = React.lazy(() => import("@/features/admin/oti/pages/Connections"));
+
 const withSuspense = (Component: React.ReactNode) => (
     <Suspense fallback={<LoadingFallback />}>{Component}</Suspense>
 );
@@ -106,6 +108,10 @@ export const RouteAdmin: RouteObject[] = [
                     {
                         path: "search-ups/:code?",
                         element: withSuspense(<UpsSearch />),
+                    },
+                    {
+                        path: "connections",
+                        element: withSuspense(<Connections />),
                     },
                     {
                         path: "filter",
